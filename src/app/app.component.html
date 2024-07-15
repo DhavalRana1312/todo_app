@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="header text-center mt-5">
+        <h1 class="display-4">ToDo App</h1>
+        <p class="lead">Advance Version With Filter</p>
+    </div>
+
+    <div class="task-input mt-5">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Task Name" [(ngModel)]="taskObj.taskName">
+        </div>
+        <div class="input-group mb-3">
+            <textarea class="form-control" placeholder="Task Decription"
+                [(ngModel)]="taskObj.taskDescription"></textarea>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Due Date" [(ngModel)]="taskObj.dueDate">
+            <input type="text" class="form-control" placeholder="Enter Comma Separated tags" [(ngModel)]="taskObj.tags">
+            <div class="input-group-append">
+                @if(taskObj.itemId ===0){
+                <button class="btn btn-success" type="button" (click)="addTask()">Add Task</button>
+                }@else{
+                <button class="btn btn-warning" type="button" (click)="updateTask()">Update</button>
+                }
+
+
+            </div>
+        </div>
+    </div>
+<!--
+    <button *ngFor="let b of buttonArray; let i = index" (click)="onClickButton(i)" class="btn btn-outline-secondary "
+        style="margin-left: 20px;background-color: #3a39fff0;color: white;font-weight: 500;">{{b}}</button>-->
+
+    <table class="table table-striped mt-5">
+        <thead>
+            <tr>
+                <th scope="col">Index</th>
+                <th scope="col">Task Name</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let item of taskList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>
+                    <input type="checkbox">
+                    {{ item.taskName }}
+                </td>
+                <td>{{item.dueDate | date:'dd-MMM-yyyy'}}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm rounded-btn" (click)="onEdit(item)">Edit</button>
+                    <button class="btn btn-danger btn-sm rounded-btn" (click)="onDelete(item.itemId)" style="    height: 30px;
+                    margin: 7px;
+                    width: 73px">Delete </button>
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
